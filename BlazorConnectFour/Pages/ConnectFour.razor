@@ -1,0 +1,49 @@
+﻿@*@page "/connectfour"*@
+@page "/"
+@using BlazorConnectFour.Data
+
+<h1>Connect Four</h1>
+
+@code
+{
+    static readonly Turn RedTurn = new Turn(PieceColor.Red, "🔴");
+    static readonly Turn YellowTurn = new Turn(PieceColor.Yellow, "🟡");
+
+    GameBoard game = new GameBoard();
+
+    Turn currentTurn = RedTurn;
+    Turn previousTurn;
+
+    private void PieceClicked(int x, int y)
+    {
+        currentTurn.SetPosition(new Position(x, y));
+        SwitchTurns();
+    }
+
+    private void SwitchTurns()
+    {
+        previousTurn = currentTurn;
+        currentTurn = previousTurn.Color == PieceColor.Red ? YellowTurn : RedTurn;
+    }
+}
+
+@if (previousTurn != null)
+{
+    <small>@previousTurn.Emoji @previousTurn.Color put [@previousTurn.Position.X, @previousTurn.Position.Y]</small>
+}
+
+<h2>@currentTurn.Emoji @currentTurn.Color's Turn!</h2>
+
+<div class="board">
+    @for (var i = 0; i < GameBoard.Cols; i++)
+    {
+        <div>
+            @for (var j = 0; j < GameBoard.Rows; j++)
+            {
+                var x = i;
+                var y = j;
+                <div class="gamepiece @game.Board[i, j].Color.ToString().ToLower()" @onclick="@(() => PieceClicked(x, y))"></div>
+            }
+        </div>
+    }
+</div>

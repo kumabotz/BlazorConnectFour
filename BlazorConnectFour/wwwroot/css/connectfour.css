@@ -1,0 +1,26 @@
+﻿.board {
+    background-color: blue;
+    display: flex;
+    flex-direction: row;
+    max-width: 490px;
+}
+
+.gamepiece {
+    border: 1px solid black;
+    margin: 5px;
+    min-height: 60px;
+    min-width: 60px;
+    border-radius: 50%;
+}
+
+.red {
+    background-color: red;
+}
+
+.yellow {
+    background-color: yellow;
+}
+
+.blank {
+    background-color: white;
+}
