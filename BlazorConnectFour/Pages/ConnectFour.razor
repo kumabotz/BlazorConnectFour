@@ -16,10 +16,15 @@
     {
         if (game.Board[x, y].Color == PieceColor.Blank)
         {
-            var space = game.Board[x, GetLowestUnOccupiedY(x, y)];
-            space.Color = currentTurn.Color;
+            SetPiece(x, y);
             SwitchTurns();
         }
+    }
+
+    private void SetPiece(int x, int y)
+    {
+        var piece = game.Board[x, GetLowestUnOccupiedY(x, y)];
+        piece.Color = currentTurn.Color;
     }
 
     private int GetLowestUnOccupiedY(int x, int y)
