@@ -16,8 +16,7 @@
     {
         if (game.Board[x, y].Color == PieceColor.Blank)
         {
-            y = GetLowestUnOccupiedY(x, y);
-            var space = game.Board[x, y];
+            var space = game.Board[x, GetLowestUnOccupiedY(x, y)];
             space.Color = currentTurn.Color;
             SwitchTurns();
         }
